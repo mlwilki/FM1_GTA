@@ -322,13 +322,14 @@ void peds_tick(const GameInput *in) {
       if (heat > 0) {
         int32_t d = dist_fp(p->x, p->y, pl->x, pl->y);
         p->ang = atan2_256(pl->x - p->x, pl->y - p->y);
-        if (d > 1600) {
-          p->x += (sin256(p->ang) * 76) >> 8;
-          p->y -= (cos256(p->ang) * 76) >> 8;
+        int32_t stop_d = (heat == 1) ? 340 : 1400;
+        if (d > stop_d) {
+          p->x += (sin256(p->ang) * 86) >> 8;
+          p->y -= (cos256(p->ang) * 86) >> 8;
           p->walk_anim++;
         }
         /* Bust player if close, on foot (or stopped car), low heat */
-        if (d < 480 && (pl->car < 0 || (cars[pl->car].speed > -120 && cars[pl->car].speed < 120))) {
+        if (d < 540 && (pl->car < 0 || (cars[pl->car].speed > -120 && cars[pl->car].speed < 120))) {
           if (heat == 1) {
             game_mode = MODE_BUSTED;
             pl->timer = 90;
@@ -339,8 +340,8 @@ void peds_tick(const GameInput *in) {
             return;
           }
         }
-        /* Shoot at player */
-        if (d < 5600 && p->fire_cd <= 0 && heat >= 1) {
+        /* Shoot at player (1-star cops arrest first; 2+ stars shoot on sight) */
+        if (d < 5600 && p->fire_cd <= 0 && heat >= 2) {
           fire_weapon(i);
           p->fire_cd = 26;
         }

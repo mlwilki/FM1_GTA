@@ -53,7 +53,17 @@ void cars_init(void) {
 
   /* Seed a few starter vehicles near Walt's lot & Market Row */
   car_spawn(CAR_SEDAN, pos_walt_x + 2400, pos_walt_y + 1200, 128, AI_PARKED, RGB(195, 55, 55));
-  car_spawn(CAR_TAXI, pos_walt_x + 4200, pos_walt_y - 2600, 64, AI_TRAFFIC, car_random_paint(CAR_TAXI));
+  {
+    int ti = car_spawn(CAR_TAXI, pos_walt_x + 4200, pos_walt_y - 2600, 128, AI_TRAFFIC, car_random_paint(CAR_TAXI));
+    if (ti >= 0) {
+      int di = ped_spawn(PED_CIV, cars[ti].x, cars[ti].y, 128);
+      if (di >= 0) {
+        peds[di].car = (int8_t)ti;
+        peds[di].state = PS_IN_CAR;
+        cars[ti].driver = (int8_t)di;
+      }
+    }
+  }
   car_spawn(CAR_HATCH, pos_shop_x - 2400, pos_shop_y + 1800, 0, AI_PARKED, RGB(48, 130, 210));
 }
 

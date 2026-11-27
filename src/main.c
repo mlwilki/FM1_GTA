@@ -166,8 +166,8 @@ static void update_leds(void) {
 void setup(void) {
   led_backlight(1);
   world_init();
-  cars_init();
   peds_init();
+  cars_init();
   combat_init();
   cops_init();
   missions_init();

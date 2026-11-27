@@ -79,16 +79,30 @@ void crime(uint8_t kind, int32_t x, int32_t y) {
 
 static void spawn_cop_unit(void) {
   int32_t px = peds[PLAYER].x, py = peds[PLAYER].y;
+  int ptx = px >> 11, pty = py >> 11;
   int k;
-  for (k = 0; k < 8; k++) {
-    int tx = (px >> 11) + (int)(oop_rnd() % 23u) - 11;
-    int ty = (py >> 11) + (int)(oop_rnd() % 23u) - 11;
+  for (k = 0; k < 12; k++) {
+    int tx, ty;
+    if (k < 4) {
+      /* Prefer spawning down the same road/avenue for direct pursuit */
+      int off = ((k & 1) ? 7 : -7) + (k >= 2 ? ((k & 1) ? 2 : -2) : 0);
+      if (world_is_road(ptx, pty)) {
+        tx = (tile_map[pty][ptx] == T_ROAD_H) ? (ptx + off) : ptx;
+        ty = (tile_map[pty][ptx] == T_ROAD_V) ? (pty + off) : pty;
+      } else {
+        tx = ptx + off;
+        ty = pty;
+      }
+    } else {
+      tx = ptx + (int)(oop_rnd() % 23u) - 11;
+      ty = pty + (int)(oop_rnd() % 23u) - 11;
+    }
     if (tx < 6 || tx > 54 || ty < 6 || ty > 46) continue;
     if (!world_is_road(tx, ty)) continue;
     int32_t sx = (tx << 11) + (TILE_FP >> 1);
     int32_t sy = (ty << 11) + (TILE_FP >> 1);
     int32_t d = dist_fp(px, py, sx, sy);
-    if (d < 8000 || d > 20000) continue;
+    if (d < 7000 || d > 20000) continue;
     if (car_near(sx, sy, 3000) >= 0) continue;
 
     int ci = car_spawn(CAR_COP, sx, sy, atan2_256(px - sx, py - sy), AI_COP, car_random_paint(CAR_COP));

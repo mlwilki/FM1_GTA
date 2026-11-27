@@ -791,24 +791,24 @@ static void draw_cutscene_carjack(void) {
   if (t >= 10) {
     int vt = t - 10;
     int32_t vx = -10 + vt * 5;
-    int32_t vz = 190 - vt * 2;
-    if (vz < 120) vz = 120;
-    draw_person_3d(vx, 0, vz, cut_ped_shirt, RGB(44, 54, 76), RGB(224, 182, 148), vt > 5 ? 2 : 0, 0);
+    int32_t vz = 225 - vt * 2;
+    if (vz < 165) vz = 165;
+    draw_person_3d(vx, -28, vz, cut_ped_shirt, RGB(44, 54, 76), RGB(224, 182, 148), vt > 5 ? 2 : 0, 0);
   }
 
   /* Player lunging, pulling, then hopping in */
   if (t < 27) {
     int32_t px = (t < 8) ? (40 - t * 6) : (t < 20 ? -8 : -8 - (t - 20) * 3);
-    int32_t pz = (t < 20) ? 168 : 168 + (t - 20) * 6;
-    draw_person_3d(px, 0, pz, RGB(240, 148, 38), RGB(38, 46, 64), RGB(235, 194, 160), (t >= 7 && t < 20) ? 1 : 0, 0);
+    int32_t pz = (t < 20) ? 210 : 210 + (t - 20) * 5;
+    draw_person_3d(px, -28, pz, RGB(240, 148, 38), RGB(38, 46, 64), RGB(235, 194, 160), (t >= 7 && t < 20) ? 1 : 0, 0);
   }
 
   /* Cinema caption */
-  text(58, 10, "CARJACKING!", RGB(248, 192, 48), FONT_SMALL);
+  text(76, 10, "CARJACKING!", RGB(248, 192, 48), FONT_SMALL);
   if (t >= 12 && t < 32) {
-    text(46, 214, "\"HEY! GET OUT OF MY CAR!\"", WHITE, FONT_SMALL);
+    text(20, 214, "\"HEY! GET OUT OF MY CAR!\"", WHITE, FONT_SMALL);
   } else if (t >= 32) {
-    text(64, 214, "FLOOR IT!  [PLAY]", RGB(56, 205, 250), FONT_SMALL);
+    text(52, 214, "FLOOR IT!  [PLAY]", RGB(56, 205, 250), FONT_SMALL);
   }
 }
 
@@ -819,21 +819,21 @@ static void draw_cutscene_busted(void) {
 
   /* 3D Police Cruiser in background */
   int x0, y0, x1, y1, x2, y2, x3, y3;
-  proj3d(-125, 14, 260, &x0, &y0);
-  proj3d(45, 14, 260, &x1, &y1);
-  proj3d(45, 50, 260, &x2, &y2);
-  proj3d(-125, 50, 260, &x3, &y3);
+  proj3d(-135, -24, 275, &x0, &y0);
+  proj3d(35, -24, 275, &x1, &y1);
+  proj3d(35, 14, 275, &x2, &y2);
+  proj3d(-135, 14, 275, &x3, &y3);
   draw_quad_any(x0, y0, x1, y1, x2, y2, x3, y3, RGB(30, 34, 46));
   /* White police door */
-  proj3d(-75, 18, 258, &x0, &y0);
-  proj3d(-5, 18, 258, &x1, &y1);
-  proj3d(-5, 48, 258, &x2, &y2);
-  proj3d(-75, 48, 258, &x3, &y3);
+  proj3d(-85, -20, 272, &x0, &y0);
+  proj3d(-15, -20, 272, &x1, &y1);
+  proj3d(-15, 12, 272, &x2, &y2);
+  proj3d(-85, 12, 272, &x3, &y3);
   draw_quad_any(x0, y0, x1, y1, x2, y2, x3, y3, RGB(230, 234, 242));
 
   /* Flashing 3D Lightbar + Beams */
   int lx, ly;
-  proj3d(-40, 74, 265, &lx, &ly);
+  proj3d(-50, 36, 275, &lx, &ly);
   uint16_t lc = flash ? RGB(255, 36, 36) : RGB(36, 128, 255);
   uint16_t rc = flash ? RGB(36, 128, 255) : RGB(255, 36, 36);
   rect(lx - 14, ly - 5, 14, 7, lc);
@@ -843,30 +843,30 @@ static void draw_cutscene_busted(void) {
 
   /* Player dropping to knees with hands up -> cuffed at t >= 42 */
   int pl_pose = (t < 10) ? 0 : (t < 42 ? 3 : 4);
-  draw_person_3d(18, 0, 175, RGB(240, 148, 38), RGB(38, 46, 64), RGB(235, 194, 160), pl_pose, 0);
+  draw_person_3d(26, -30, 215, RGB(240, 148, 38), RGB(38, 46, 64), RGB(235, 194, 160), pl_pose, 0);
 
   /* Officer walking in to arrest player */
-  int32_t cop_x = (t < 38) ? (110 - t * 2) : 34;
-  draw_person_3d(cop_x, 0, 162, RGB(34, 64, 152), RGB(24, 34, 76), RGB(215, 170, 134), (t >= 38 && t < 50) ? 1 : 0, 1);
+  int32_t cop_x = (t < 38) ? (125 - t * 2) : 52;
+  draw_person_3d(cop_x, -30, 205, RGB(34, 64, 152), RGB(24, 34, 76), RGB(215, 170, 134), (t >= 38 && t < 50) ? 1 : 0, 1);
 
   /* Handcuff sparkle at t=42..50 */
   if (t >= 42 && t <= 50) {
     int cx, cy;
-    proj3d(18, 22, 165, &cx, &cy);
+    proj3d(26, -6, 205, &cx, &cy);
     line(cx - 8, cy, cx + 8, cy, WHITE);
     line(cx, cy - 8, cx, cy + 8, WHITE);
   }
 
-  /* Dramatic BUSTED slam banner */
+  /* Dramatic BUSTED slam banner (upper band so cruiser & arrest stay visible!) */
   if (t >= 48) {
-    rect(34, 78, 172, 42, RGB(12, 14, 22));
-    frame(34, 78, 172, 42, flash ? RGB(255, 48, 56) : RGB(56, 156, 255));
-    text(72, 84, "BUSTED", flash ? RGB(255, 64, 64) : RGB(64, 168, 255), FONT_BIG);
+    rect(46, 44, 148, 40, RGB(12, 14, 22));
+    frame(46, 44, 148, 40, flash ? RGB(255, 48, 56) : RGB(56, 156, 255));
+    text(72, 48, "BUSTED", flash ? RGB(255, 64, 64) : RGB(64, 168, 255), FONT_BIG);
   }
 
-  text(46, 10, "PAROLE VIOLATION", flash ? RGB(255, 76, 76) : RGB(76, 168, 255), FONT_SMALL);
-  if (t < 38) text(38, 214, "\"FREEZE! HANDS IN THE AIR!\"", WHITE, FONT_SMALL);
-  else text(34, 214, "\"YOU'RE GOING BACK IN! -$100\"", RGB(248, 192, 48), FONT_SMALL);
+  text(56, 10, "PAROLE VIOLATION", flash ? RGB(255, 76, 76) : RGB(76, 168, 255), FONT_SMALL);
+  if (t < 38) text(18, 214, "\"FREEZE! HANDS IN THE AIR!\"", WHITE, FONT_SMALL);
+  else text(16, 214, "\"BACK TO PRECINCT! -$100\"", RGB(248, 192, 48), FONT_SMALL);
 }
 
 void render_frame(void) {
