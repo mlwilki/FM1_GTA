@@ -3,7 +3,9 @@
 A clean, native open-world crime game firmware for the **M-VAVE FM-1** (`foma` platform, identity `FM-1_187`), ported from [mlwilki/outonparole](https://github.com/mlwilki/outonparole).
 
 **Play & Install in Browser:** https://mlwilki.github.io/FM1_GTA/#emulator
-**Demo Video (with live FM-1 LEDs & synthesized audio):** [docs/demo.mp4](docs/demo.mp4)
+**Watch 60s Trailer on YouTube:** https://youtu.be/-YgpPS0PEE8
+
+[![Watch FM1_GTA Demo Trailer on YouTube](docs/video-thumb.png)](https://youtu.be/-YgpPS0PEE8)
 
 ## Screenshots
 
