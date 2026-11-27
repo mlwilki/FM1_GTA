@@ -1,6 +1,6 @@
 # FM1_GTA (Out on Parole — M-VAVE FM-1 Edition)
 
-A clean, native open-world crime game firmware for the **M-VAVE FM-1** (`foma` platform, identity `FM-1_187`), ported from [mlwilki/outonparole](https://github.com/mlwilki/outonparole).
+A clean, native open-world crime game firmware for the **M-VAVE FM-1** (`foma` platform, identity `FM-1_187`), ported from [shaydex-codes/outonparole](https://github.com/shaydex-codes/outonparole).
 
 **Play & Install in Browser:** https://mlwilki.github.io/FM1_GTA/#emulator
 **Watch 60s Trailer on YouTube:** https://youtu.be/-YgpPS0PEE8

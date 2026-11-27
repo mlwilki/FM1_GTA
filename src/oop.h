@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Out on Parole — M-VAVE FM-1 Edition (pure integer fixed-point port of mlwilki/outonparole) */
+/* Out on Parole — M-VAVE FM-1 Edition (pure integer fixed-point port of shaydex-codes/outonparole) */
 #ifndef OOP_H
 #define OOP_H
 
