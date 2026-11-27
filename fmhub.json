@@ -1,0 +1,9 @@
+{
+  "what": "Open-world top-down crime game (Out on Parole) for the M-VAVE FM-1. Features a 64x64 coastal city with day/night cycle, 4-level zoom, 10 vehicle types, 4 weapons, 5-star police and helicopter chases, 3D-style carjacking and arrest cutscenes, 5 Walt story missions, Pawn Kings gun shop, Respray garage, Docks Car Export, Taxi fares, 16 stashes, key LED lightbar effects, and a 4-station GTA-style FM synth radio.",
+  "author": "mlwilki",
+  "kinds": ["other"],
+  "play": "https://mlwilki.github.io/FM1_GTA/#emulator",
+  "image": "docs/card.png",
+  "color": "#38BDF8",
+  "sounds": "none"
+}

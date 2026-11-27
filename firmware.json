@@ -1,0 +1,10 @@
+{
+  "name": "FM1_GTA",
+  "version": "0.7",
+  "identity": "FM-1_18",
+  "options": {
+    "usb_audio": false,
+    "trs_midi": false,
+    "midi_clock": false
+  }
+}
